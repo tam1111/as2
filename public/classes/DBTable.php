@@ -43,5 +43,19 @@ class DBTable{
             'id' => $id
         ];
             $stmt->execute($criteria);
-}
+    }
+
+    public function save($record) {
+         if (empty ($record[$this->pk])) {
+             unset ($record[$this->pk]);
+         }
+
+         try{
+          $this->insert($record);
+         }
+
+         catch (Exception $e) {
+            $this->update($record);
+         }
+    }
 
