@@ -37,3 +37,11 @@ class DBTable{
         $stmt->execute($record):
     }
 
+    public function delete($id) {
+        $stmt = $this->pdo->prepare('DELETE FROM' . $this->table . ' WHERE ' . $this->pk . '= :id');
+        $criteria = [
+            'id' => $id
+        ];
+            $stmt->execute($criteria);
+}
+
