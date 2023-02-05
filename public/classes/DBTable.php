@@ -28,4 +28,12 @@ class DBTable{
          return $stmt->fetchAl();
     }
 
-  
+    public function insert ($record) {
+        $keys = array_keys ($record):
+        $values = implode(',',$keys);
+        $valuesWithColon = implode(',:',$keys);
+        $query = 'INSERT INTO ' . $this->table . '(' . $values . ') VALUES(:' . $valuesWithColon . ')';
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute($record):
+    }
+
