@@ -59,3 +59,20 @@ class DBTable{
          }
     }
 
+    public function update($record){
+        $query = 'UPDATE ' . $this->table. 'SET';
+
+        $parameters = [];
+        foreach($record as $key => $value){
+            $parameters[] = $key . '= :' . $key;
+        }
+        $query .= implode(',', $parameters);
+        $query .= 'WHERE ' . $this->pk . '= :pk';
+
+        $record ['pk'] = $record[$this->pk];
+        $stmt = $this ->pdo->prepare($query);
+
+        $stmt->execute($record);
+    }
+}
+
