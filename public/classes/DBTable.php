@@ -22,4 +22,10 @@ class DBTable{
         return $stmt->fetchAll();
     }
 
+    public function findAll(){
+        $stmt = $this->pdo->prepare('SELECT * FROM' . $this->table);
+        $stmt->execute();
+         return $stmt->fetchAl();
+    }
+
   
